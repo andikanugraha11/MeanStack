@@ -1,10 +1,33 @@
 const express	= require('express');
 const router	= express.Router();
+const passport	= require('passport');
+const jwt		= require('jsonwebtoken');
 
+const User 		= require('../models/userSchema');
 
 //Users/register
 router.post('/register', (req,res,next)=>{
-	res.send('register');
+	let newUser	= new User({
+		name		: req.body.name,
+		email		: req.body.email,
+		username	: req.body.username,
+		password	: req.body.password
+	});
+
+	User.addUser(newUser, (err,user)=>{
+		if(err){
+			res.json({
+				success	: false,
+				msg		: 'Pendaftaran gagal'
+			});
+		}else
+		{
+			res.json({
+				success	: true,
+				msg		: 'Pendaftaran sukses'
+			});
+		}
+	});
 });
 
 //Users/profile

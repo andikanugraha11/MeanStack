@@ -21,13 +21,27 @@ const UserSchema = mongoose.Schema({
 	}
 });
 
+//User collections
 const User = module.exports = mongoose.model('User', UserSchema);
 
+//GET user by ID
 module.exports.getUserById = function(id,callback){
 	User.findById(id,callback);
 }
 
+//GET user by username
 module.exports.getUserByUsername = function(username,callback){
 	const query = {username : username};
 	User.findOne(query, callback);
+}
+
+//ADD user
+module.exports.addUser = function(newUser, callback){
+	bcrypt.genSalt(10, function(err, salt){
+		bcrypt.hash(newUser.password, salt, (err, hash)=>{
+			if(err) throw err;
+			newUser.password = hash;
+			newUser.save(callback);
+		})
+	});
 }
