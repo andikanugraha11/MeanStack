@@ -30,8 +30,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //Passpoert Middlewar
-aap.use(passport.serialize());
-app.use(passport.session())
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
 
 //Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
