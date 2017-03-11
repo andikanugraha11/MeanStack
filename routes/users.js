@@ -2,6 +2,7 @@ const express	= require('express');
 const router	= express.Router();
 const passport	= require('passport');
 const jwt		= require('jsonwebtoken');
+const config 	= require('../config/database');
 
 const User 		= require('../models/userSchema');
 
@@ -31,12 +32,12 @@ router.post('/register', (req,res,next)=>{
 });
 
 //Users/profile
-router.get('/profile', (req,res,next)=>{
-	res.send('profile');
+router.get('/profile', passport.authenticate('jwt', {session:false}) , (req,res,next)=>{
+	res.json({user: req.user})
 });
 
 //Users/Authenticate
-router.get('/authenticate', (req,res,next)=>{
+router.post('/authenticate', (req,res,next)=>{
 	const username = req.body.username;
 	const password = req.body.password;
 
@@ -59,8 +60,8 @@ router.get('/authenticate', (req,res,next)=>{
 					success	: true,
 					token	: `JWT ${token}`,
 					user 	: {
-						id		: user._id,
-						name	: user.name,
+						id			: user._id,
+						name		: user.name,
 						username 	: user.username,
 						email		: user.email
 					}
