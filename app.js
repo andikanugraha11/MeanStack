@@ -29,6 +29,10 @@ app.use(cors());
 //Body Parser Middleware
 app.use(bodyParser.json());
 
+//Passpoert Middlewar
+aap.use(passport.serialize());
+app.use(passport.session())
+
 //Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
