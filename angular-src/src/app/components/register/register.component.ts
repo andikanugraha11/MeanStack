@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-	nama		: String;
+	name		: String;
 	username 	: String;
 	email		: String;
 	password	: String;
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
 
 	onRegisterSubmit(){
 		const user = {
-			nama		: this.nama,
+			name		: this.name,
 			username	: this.username,
 			email		: this.email,
 			password	: this.password

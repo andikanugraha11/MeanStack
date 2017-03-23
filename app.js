@@ -47,6 +47,11 @@ app.get('/', (req,res)=> {
 	res.send('Hello PI');
 });
 
+app.get('*', (req,res)=> {
+	res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
+
 //Start Server
 app.listen(port, ()=> {
 	console.log(`Server berjalan pada port ${port}`);

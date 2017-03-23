@@ -12,8 +12,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
   	private authService : AuthService,
-	private router : Router,
-	private flashMessage : FlashMessagesService
+	  private router : Router,
+	  private flashMessage : FlashMessagesService
 	) { }
 
   ngOnInit() {
