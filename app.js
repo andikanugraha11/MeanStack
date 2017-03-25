@@ -21,7 +21,7 @@ mongoose.connection.on('error', (err)=>{
 });
 
 //Port Number
-const port = 3000;
+const port = process.env.PORT || 8081;
 
 //CORS Middleware
 app.use(cors());
@@ -43,14 +43,17 @@ const users = require('./routes/users');
 app.use('/users', users);
 
 //Index Route
-app.get('/', (req,res)=> {
+app.get('/dika', (req,res)=> {
 	res.send('Hello PI');
 });
 
 app.get('*', (req,res)=> {
-	res.sendFile(path.join(__dirname, 'public/index.html'));
+		res.sendFile(path.join(__dirname, 'public/index.html'));
 });
-
+// app.get('*', (req,res)=> {
+// 	res.send('404');
+// 	console.log('404');
+// });
 
 //Start Server
 app.listen(port, ()=> {
